@@ -40,7 +40,6 @@ $(document).ready(function(){
         $("#create_quest").html("<div class='success'>" + data + "</div>")
         $("#create_quest").append("<a href = '/quests' id = 'done'> I'm done adding checkpoints </a>")
         $("#create_quest").append(location_form)
-        
       })
   })
 
