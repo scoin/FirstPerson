@@ -3,7 +3,7 @@ class UserCheckpoint < ActiveRecord::Base
   belongs_to :checkpoint
 
 
-  def complete!
+  def complete! #make one line
     unless self.completed
       self.update(completed: true)
     end

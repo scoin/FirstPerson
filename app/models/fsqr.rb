@@ -1,3 +1,6 @@
+#8/25/14 - investigate use of service object in refactoring
+#security - currently token is stored in session 
+
 class Fsqr
   attr_accessor :client
 
@@ -5,15 +8,18 @@ class Fsqr
     @client = Foursquare2::Client.new(oauth_token: token, api_version: '20140724')
   end
 
-  def checkin
-  	self.client.add_checkin(ll: self.rand_loc, broadcast: "public")
-  end
+  # def checkin
+  # 8/25/14 this should be deleted, remnant of random checkin
+  # 	self.client.add_checkin(ll: self.rand_loc, broadcast: "public")
+  # end
 
   def get_by_foursquare_id
     user = User.find_by(foursquare_id: (self.client.user("self")[:id]).to_i) || nil
   end
 
-  def search(query, ll, location_id)
+  def search(query, ll, location_id) 
+    #searches foursquare locations db for matching venues
+    #rework this to send address and not lat long, may be outside the capabilities of the gem
     returned_venues = self.client.suggest_completion_venues(query: query, ll: ll, limit: '15')
     self.parse_search(returned_venues, location_id)
   end

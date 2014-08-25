@@ -43,7 +43,7 @@ class FoursquareController < ActionController::Base
 
   def set_session
     session[:user_id] = @user.id
-    session[:token] = @token
+    session[:token] = @token 
   end
 
   def checkin_params(location, params)

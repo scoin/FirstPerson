@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   # devise :database_authenticatable, :registerable,
          # :recoverable, :rememberable, :trackable
-  include UsersHelper
+  include UsersHelper #no helpers in models or controllers, service object?
 
   has_many :created_quests, class_name: 'Quest', foreign_key: 'creator_id' #alias
   has_many :user_quests
@@ -18,17 +18,18 @@ class User < ActiveRecord::Base
 
   before_create :set_defaults
 
-  def completed_quests
+  def completed_quests #move this into a scope under completed quests
     self.user_quests.select{|quest| quest.completed == true}
   end
 
   def self.sort_users
+    #this is for the xp leaderboard, rename to something more descriptive like self.top_exp
      @users = User.order(:total_xp).reverse.take(10)
   end
 
   def set_defaults
     self.total_xp ||= 0
-    self.photo_url = "http://www.infragistics.com/media/8948/anonymous_200.gif"
+    self.photo_url = "http://www.infragistics.com/media/8948/anonymous_200.gif" #should be ||=
   end
 
 end

@@ -15,6 +15,8 @@ module CheckInsHelper
   end
 
   def check_in_xp
+    #called after_create in models/check_in.rb
+    #calculates distance using haversine and awards xp based on distance
     distance = distance_since_last_checkin
     xp = 10 + distance/5000 * Math.log2(distance)
     user = User.find(self.user_id)

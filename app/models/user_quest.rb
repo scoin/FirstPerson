@@ -13,7 +13,7 @@ class UserQuest < ActiveRecord::Base
     end
   end
 
-  def create_related_checkpoints
+  def create_related_checkpoints #appears to be an artifact, delete
     self.quest.checkpoints
   end
   

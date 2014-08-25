@@ -17,6 +17,7 @@ class Quest < ActiveRecord::Base
     self.xp ||= 100
   end
 
+#8/25/14 - HIGH PRIORITY - all user 'scoped' class methods here need to be moved to user model as instance methods or straight up removed
 
   def self.user_accepted_quests(user)
     quests=[]
@@ -44,6 +45,8 @@ class Quest < ActiveRecord::Base
     end
     return quests
   end
+
+#end user instance methods
 
   def set_time_status
     if self.start_date > Time.now

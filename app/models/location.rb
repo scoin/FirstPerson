@@ -14,7 +14,10 @@ class Location < ActiveRecord::Base
     self.address = [self.street, self.city, self.state, self.zip].join(', ')
   end
 
-  def get_latlng
+  def get_latlng 
+    #makes http request to mapquest for geocoding
+    #remove geocoding if possible and send foursquare address for latlng
+    #if we cannot do this, use my OpenGeo gem and remove this code from here
     unless self.latitude
       address = self.address.split(' ').join('%20')
       url = "open.mapquestapi.com"

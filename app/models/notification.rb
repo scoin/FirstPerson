@@ -5,3 +5,6 @@ class Notification < ActiveRecord::Base
     {title: self.title, content: self.content}
   end
 end
+
+#remove if using a polling solution with persistence ie. pubnub
+#keep if using straight websockets for messaging
